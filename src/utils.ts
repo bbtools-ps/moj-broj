@@ -25,22 +25,13 @@ function createFullExpression(exprA: string, exprB: string, symbol: string) {
 
 export function findSolution(nums: number[], targetNum: number) {
   // Use index-based tracking to handle duplicate numbers correctly
-  const MAX_DEPTH = 6; // Limit search depth
-  const PRUNE_THRESHOLD = 2; // Prune branches unlikely to improve
-
-  const queue: [
-    number[],
-    Map<number, { value: number; expr: string }>,
-    number,
-  ][] = [
+  const queue: [number[], Map<number, { value: number; expr: string }>][] = [
     [
       nums,
       new Map(nums.map((n, idx) => [idx, { value: n, expr: n.toString() }])),
-      0, // depth
     ],
   ];
   const visited = new Set([[...nums].sort().join()]);
-  const resultCache = new Map<string, number>(); // Cache intermediate results
   let closest = Infinity;
   let closestResult = 0;
   let closestSolution = '';
@@ -57,10 +48,7 @@ export function findSolution(nums: number[], targetNum: number) {
   }
 
   while (queue.length > 0) {
-    const [currentNums, exprMap, depth] = queue.shift()!;
-
-    // Depth limiting - prevent excessive exploration
-    if (depth >= MAX_DEPTH) continue;
+    const [currentNums, exprMap] = queue.shift()!;
 
     // Generate all combinations of two numbers
     for (let i = 0; i < currentNums.length; i++) {
@@ -98,12 +86,6 @@ export function findSolution(nums: number[], targetNum: number) {
             // Check validity
             if (value < 0 || !Number.isSafeInteger(value)) continue;
 
-            const currentDiff = Math.abs(targetNum - value);
-
-            // Prune branches that are unlikely to improve - skip values too far from target
-            if (currentDiff > closest * PRUNE_THRESHOLD && closest !== Infinity)
-              continue;
-
             // Create new number set
             const newNums = currentNums.filter(
               (_: number, idx: number) => idx !== i && idx !== j
@@ -111,11 +93,6 @@ export function findSolution(nums: number[], targetNum: number) {
             newNums.push(value);
 
             const stateKey = [...newNums].sort().join();
-
-            // Check result cache to avoid duplicate computation
-            const cacheKey = `${value}-${stateKey}`;
-            if (resultCache.has(cacheKey)) continue;
-            resultCache.set(cacheKey, value);
 
             if (!visited.has(stateKey)) {
               visited.add(stateKey);
@@ -141,14 +118,16 @@ export function findSolution(nums: number[], targetNum: number) {
                 return { result: value, solution: fullExpression };
               }
 
+              const currentDiff = Math.abs(targetNum - value);
+
               if (currentDiff < closest) {
                 closest = currentDiff;
                 closestResult = value;
                 closestSolution = fullExpression;
               }
 
-              // Add to queue for further exploration with incremented depth
-              queue.push([newNums, newExprMap, depth + 1]);
+              // Add to queue for further exploration
+              queue.push([newNums, newExprMap]);
             }
           }
         }
