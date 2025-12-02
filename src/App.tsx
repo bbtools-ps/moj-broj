@@ -5,16 +5,9 @@ import Button from './components/Button';
 import Input from './components/Input';
 import { findSolution, generateRandomNumber, pickRandomNumber } from './utils';
 
-function App() {
+export default function App() {
   const [targetNumber, setTargetNumber] = useState<string>('');
-  const [availableNumbers, setAvailableNumbers] = useState<string[]>([
-    '1',
-    '1',
-    '1',
-    '1',
-    '10',
-    '25',
-  ]);
+  const [availableNumbers, setAvailableNumbers] = useState<string[]>([]);
   const [solution, setSolution] = useState<{
     result: number;
     solution: string;
@@ -174,5 +167,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
