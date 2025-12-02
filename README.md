@@ -1,75 +1,80 @@
-# React + TypeScript + Vite
+# Moj Broj
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based implementation of the popular Serbian numbers game "Moj Broj" (My Number), where players must reach a target number using arithmetic operations on a set of given numbers.
 
-Currently, two official plugins are available:
+## About the Game
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+"Moj Broj" is a mathematical puzzle game where:
 
-## React Compiler
+- A random target number (0-999) is generated
+- Six numbers are provided (four single-digit numbers 1-9, one from [10, 15, 20], and one from [25, 50, 75, 100])
+- Players must use basic arithmetic operations (+, -, ×, ÷) to reach the target number
+- Each number can only be used once
+- The game includes an automatic solver that finds the solution or the closest possible result
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Features
 
-Note: This will impact Vite dev & build performances.
+- 🎲 Random number generation
+- 🧮 Automatic solution finder using BFS algorithm
+- 🎯 Finds exact solutions or closest possible results
+- ⌨️ Custom numeric inputs with validation
+- 🔄 Stepper controls and mouse wheel support for number selection
+- 📱 Responsive design with Tailwind CSS
+- ⚡ Built with React 19 and TypeScript
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19** - UI framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Tailwind CSS 4** - Styling
+- **Font Awesome** - Icons
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Prerequisites
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js (v18 or higher)
+- pnpm (recommended) or npm
+
+### Installation
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
+
+# Lint code
+pnpm lint
+
+# Format code
+pnpm format
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## How to Use
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Enter a target number (0-999) or click "Izmešaj" (Shuffle) to generate random numbers
+2. The solver will automatically find a solution using the given numbers
+3. You can manually adjust the available numbers using the input fields
+4. Click "Rešenje" (Solution) to calculate and display the solution
+5. Click "Resetuj" (Reset) to clear all values
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Algorithm
+
+The solution finder uses a **Breadth-First Search (BFS)** algorithm:
+
+- Generates all possible combinations of two numbers
+- Applies all four arithmetic operations (+, -, ×, ÷)
+- Tracks used numbers by index to prevent duplicate usage
+- Validates results (no negative numbers, integers only for division)
+- Returns exact match or closest result

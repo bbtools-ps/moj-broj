@@ -55,7 +55,7 @@ function App() {
 
   return (
     <div className="relative h-full w-full">
-      <div className="absolute inset-0 -z-10 bg-[url(/bg.webp)] opacity-25" />
+      <div className="absolute inset-0 -z-10 bg-[url(/bg.webp)] bg-cover bg-center opacity-25" />
       <div className="absolute inset-0 -z-20 bg-[#119ef5]" />
       <div className="flex h-full w-full flex-col gap-6 overflow-auto p-4">
         <h1 className="my-10 text-center text-5xl font-bold text-[#031572]">
