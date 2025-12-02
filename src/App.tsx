@@ -64,57 +64,55 @@ export default function App() {
             }}
           />
         </div>
-        <div className="flex flex-wrap justify-center gap-4">
-          <div className="flex flex-wrap justify-center gap-2">
-            <Input
-              value={availableNumbers[0] ?? ''}
-              onChange={(value) => {
-                setAvailableNumbers((prev) => {
-                  const newNumbers = [...prev];
-                  newNumbers[0] = value;
-                  return newNumbers;
-                });
-              }}
-              max={9}
-              placeholder="1-9"
-            />
-            <Input
-              value={availableNumbers[1] ?? ''}
-              onChange={(value) => {
-                setAvailableNumbers((prev) => {
-                  const newNumbers = [...prev];
-                  newNumbers[1] = value;
-                  return newNumbers;
-                });
-              }}
-              max={9}
-              placeholder="1-9"
-            />
-            <Input
-              value={availableNumbers[2] ?? ''}
-              onChange={(value) => {
-                setAvailableNumbers((prev) => {
-                  const newNumbers = [...prev];
-                  newNumbers[2] = value;
-                  return newNumbers;
-                });
-              }}
-              max={9}
-              placeholder="1-9"
-            />
-            <Input
-              value={availableNumbers[3] ?? ''}
-              onChange={(value) => {
-                setAvailableNumbers((prev) => {
-                  const newNumbers = [...prev];
-                  newNumbers[3] = value;
-                  return newNumbers;
-                });
-              }}
-              max={9}
-              placeholder="1-9"
-            />
-          </div>
+        <div className="flex flex-wrap justify-center gap-2">
+          <Input
+            value={availableNumbers[0] ?? ''}
+            onChange={(value) => {
+              setAvailableNumbers((prev) => {
+                const newNumbers = [...prev];
+                newNumbers[0] = value;
+                return newNumbers;
+              });
+            }}
+            max={9}
+            placeholder="1-9"
+          />
+          <Input
+            value={availableNumbers[1] ?? ''}
+            onChange={(value) => {
+              setAvailableNumbers((prev) => {
+                const newNumbers = [...prev];
+                newNumbers[1] = value;
+                return newNumbers;
+              });
+            }}
+            max={9}
+            placeholder="1-9"
+          />
+          <Input
+            value={availableNumbers[2] ?? ''}
+            onChange={(value) => {
+              setAvailableNumbers((prev) => {
+                const newNumbers = [...prev];
+                newNumbers[2] = value;
+                return newNumbers;
+              });
+            }}
+            max={9}
+            placeholder="1-9"
+          />
+          <Input
+            value={availableNumbers[3] ?? ''}
+            onChange={(value) => {
+              setAvailableNumbers((prev) => {
+                const newNumbers = [...prev];
+                newNumbers[3] = value;
+                return newNumbers;
+              });
+            }}
+            max={9}
+            placeholder="1-9"
+          />
           <Input
             value={availableNumbers[4] ?? ''}
             onChange={(value) => {
@@ -140,6 +138,12 @@ export default function App() {
             placeholder="25, 50, 75, 100"
           />
         </div>
+        <div className="mx-auto w-full max-w-xl rounded-md border-2 border-[#9d9fa5] bg-[#031572] p-3 text-center text-2xl font-medium text-white outline-2 outline-[#031572] focus:outline">
+          <p>
+            <strong>{solution?.result ?? '\u00A0'}</strong>
+          </p>
+          <p className="text-amber-300">{solution?.solution ?? '\u00A0'}</p>
+        </div>
         <div className="flex flex-col gap-2">
           <Button onClick={handleGenerateRandomNumbers}>
             <FontAwesomeIcon icon={faRandom} /> Izmešaj
@@ -153,16 +157,6 @@ export default function App() {
             Rešenje
           </Button>
         </div>
-        {solution?.solution && (
-          <div className="mx-auto rounded-md bg-[#031572] p-6 text-xl text-white">
-            <p>
-              Rezultat: <strong>{solution.result}</strong>
-            </p>
-            <p>
-              Rešenje: <strong>{solution.solution}</strong>
-            </p>
-          </div>
-        )}
       </div>
     </div>
   );
