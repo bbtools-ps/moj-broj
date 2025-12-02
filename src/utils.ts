@@ -99,6 +99,19 @@ export function findSolution(nums: number[], targetNum: number) {
 
               const fullExpression = createFullExpression(exprA, exprB, symbol);
 
+              // Check if we found the target
+              if (targetNum === value) {
+                return { result: value, solution: fullExpression };
+              }
+
+              const currentDiff = Math.abs(targetNum - value);
+
+              if (currentDiff < closest) {
+                closest = currentDiff;
+                closestResult = value;
+                closestSolution = fullExpression;
+              }
+
               // Create new expression map with updated indices
               const newExprMap = new Map<
                 number,
@@ -112,19 +125,6 @@ export function findSolution(nums: number[], targetNum: number) {
                 }
               }
               newExprMap.set(newIdx, { value, expr: fullExpression });
-
-              // Check if we found the target
-              if (targetNum === value) {
-                return { result: value, solution: fullExpression };
-              }
-
-              const currentDiff = Math.abs(targetNum - value);
-
-              if (currentDiff < closest) {
-                closest = currentDiff;
-                closestResult = value;
-                closestSolution = fullExpression;
-              }
 
               // Add to queue for further exploration
               queue.push([newNums, newExprMap]);
