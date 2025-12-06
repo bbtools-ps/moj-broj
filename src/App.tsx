@@ -28,6 +28,14 @@ export default function App() {
     setSolution(undefined);
   };
 
+  const handleChangeAvailableNumber = (index: number, value: string) => {
+    setAvailableNumbers((prev) => {
+      const newNumbers = [...prev];
+      newNumbers[index] = value;
+      return newNumbers;
+    });
+  };
+
   const handleReset = () => {
     setTargetNumber('');
     setAvailableNumbers(['', '', '', '', '', '']);
@@ -67,73 +75,37 @@ export default function App() {
         <div className="flex flex-wrap justify-center gap-2">
           <Input
             value={availableNumbers[0] ?? ''}
-            onChange={(value) => {
-              setAvailableNumbers((prev) => {
-                const newNumbers = [...prev];
-                newNumbers[0] = value;
-                return newNumbers;
-              });
-            }}
+            onChange={(value) => handleChangeAvailableNumber(0, value)}
             max={9}
             placeholder="1-9"
           />
           <Input
             value={availableNumbers[1] ?? ''}
-            onChange={(value) => {
-              setAvailableNumbers((prev) => {
-                const newNumbers = [...prev];
-                newNumbers[1] = value;
-                return newNumbers;
-              });
-            }}
+            onChange={(value) => handleChangeAvailableNumber(1, value)}
             max={9}
             placeholder="1-9"
           />
           <Input
             value={availableNumbers[2] ?? ''}
-            onChange={(value) => {
-              setAvailableNumbers((prev) => {
-                const newNumbers = [...prev];
-                newNumbers[2] = value;
-                return newNumbers;
-              });
-            }}
+            onChange={(value) => handleChangeAvailableNumber(2, value)}
             max={9}
             placeholder="1-9"
           />
           <Input
             value={availableNumbers[3] ?? ''}
-            onChange={(value) => {
-              setAvailableNumbers((prev) => {
-                const newNumbers = [...prev];
-                newNumbers[3] = value;
-                return newNumbers;
-              });
-            }}
+            onChange={(value) => handleChangeAvailableNumber(3, value)}
             max={9}
             placeholder="1-9"
           />
           <Input
             value={availableNumbers[4] ?? ''}
-            onChange={(value) => {
-              setAvailableNumbers((prev) => {
-                const newNumbers = [...prev];
-                newNumbers[4] = value;
-                return newNumbers;
-              });
-            }}
+            onChange={(value) => handleChangeAvailableNumber(4, value)}
             allowedValues={[10, 15, 20]}
             placeholder="10, 15, 20"
           />
           <Input
             value={availableNumbers[5] ?? ''}
-            onChange={(value) => {
-              setAvailableNumbers((prev) => {
-                const newNumbers = [...prev];
-                newNumbers[5] = value;
-                return newNumbers;
-              });
-            }}
+            onChange={(value) => handleChangeAvailableNumber(5, value)}
             allowedValues={[25, 50, 75, 100]}
             placeholder="25, 50, 75, 100"
           />
