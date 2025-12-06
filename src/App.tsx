@@ -38,7 +38,7 @@ export default function App() {
 
   const handleReset = () => {
     setTargetNumber('');
-    setAvailableNumbers(['', '', '', '', '', '']);
+    setAvailableNumbers([]);
     setSolution(undefined);
   };
 
